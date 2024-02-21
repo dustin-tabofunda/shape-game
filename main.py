@@ -29,11 +29,29 @@ game_started = False
 text_turtle = t.Turtle()
 text_turtle.penup()
 text_turtle.ht()
+score_turtle = t.Turtle()
+score_turtle.penup()
+score_turtle.ht()
 
 def crash():
   left_wall = -200
   right_wall = 200
   top_wall = 200
   bottom_wall = -200
-  
+  (x,y) = snake.position()
+  outside = x>right_wall or y>top_wall or y<bottom_wall or x<left_wall
+  return outside
+def place_food():
+  food.hideturtle()
+  food.setpos(random.randint(-180,180),random.randint(-180,180))
+  food.showturtle()
+def game_over():
+  snake.hideturtle()
+  food.hideturtle()
+  text_turtle.clear
+  text_turtle.write("Game Over!", align = "center", font = ("Arial", 50, "bold"))
+def display_score(score):
+  score_turtle.clear
+  score_turtle.setpos(180,180)
+  score_turtle.write(score, alig)
 t.mainloop()
