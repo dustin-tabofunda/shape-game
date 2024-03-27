@@ -32,6 +32,7 @@ text_turtle.ht()
 score_turtle = t.Turtle()
 score_turtle.penup()
 score_turtle.ht()
+text_turtle.write("Press Space to start!", align= "center", font = ("Comic Sans MS",40, "bold"))
 
 def crash():
   left_wall = -200
@@ -48,10 +49,47 @@ def place_food():
 def game_over():
   snake.hideturtle()
   food.hideturtle()
-  text_turtle.clear
+  text_turtle.clear()
   text_turtle.write("Game Over!", align = "center", font = ("Arial", 50, "bold"))
 def display_score(score):
-  score_turtle.clear
+  score_turtle.clear()
   score_turtle.setpos(180,180)
-  score_turtle.write(score, alig)
-t.mainloop()
+  score_turtle.write(score, align = "center", font = ("Arial", 50, "Bold"))
+def start_game():
+  global game_started
+  if game_started:
+    return
+  game_started = True 
+  text_turtle.clear()
+  score = 0
+  snake_speed = 1
+  place_food()
+  display_score(score)
+  snake.st()
+  while True:
+    snake.forward(snake_speed)
+    if snake.distance(food)<20:
+      score +=1
+      snake_speed+=1
+      place_food()
+    if crash():
+      game_over()
+      break
+#def move_up():
+  if snake.heading()==180 or snake.heading()==0 or snake.heading==(270):
+  snake.setheading(90)
+def move_down():
+    if snake.heading()==180 or snake.heading==0 or snake.heading==(270)
+def move_right():
+  if snake.heading()==90 or snake.heading()==270 or snake.heading()==0:
+def move_left():
+  if snake.heading()==90 or snake.heading()==270 or snake.heading==0: 
+  snake.setheading(180)
+window = t.Screen()
+window.onkey(move_up, "Up")
+window.onkey(move_down,"Down")
+window.onkey(move_left,"Left")
+window.onkey(move_right, "Right")
+window.onkey(start_game, "Space")
+window.listen()
+t.mainloop()  
